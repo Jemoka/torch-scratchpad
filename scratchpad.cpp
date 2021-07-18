@@ -1,11 +1,21 @@
 #include <iostream>
 #include <torch/torch.h>
+#include <torch/nn.h>
+
+struct Net : torch::nn::Module {
+    torch::nn::Linear hahahhahaha;
+
+    Net() {
+        hahahhahaha = register_module("fc1", torch::nn::Linear(12, 23));
+    }
+
+    torch::Tensor forward(torch::Tensor x) {
+        return hahahhahaha->forward(x);
+    }
+};
 
 int main() {
-    torch::Tensor tensor = torch::rand({1, 2});
-    torch::Tensor tensor1 = torch::rand({5, 8});
-
-    std::cout << tensor1 << std::endl;
+    auto net = std::make_shared<Net>();
 
     return 0;
 }
